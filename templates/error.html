@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{# 页面标题 #}
+{% block title %}
+    Tester | Error
+{% endblock %}
+
+{% block nav_home_active %}active{% endblock %}
+
+{% block content %}
+   {{ message }}, <a href="{{ redirect_to }}">Return</a>
+{% endblock %}

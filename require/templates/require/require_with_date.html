@@ -1,0 +1,8 @@
+{% extends 'require/require_list.html' %}
+
+{# 页面标题 #}
+{% block title %}Type{% endblock %}
+
+{% block require_list_title %}By date: {{ requires_with_date }}  <a href="{% url "require_list"%}">View All</a>{% endblock %}
+
+

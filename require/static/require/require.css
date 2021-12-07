@@ -1,0 +1,59 @@
+ul.require-types{
+    list-style-type: none;
+}
+div.require:not(last-child){
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+div.require.h3{
+    margin-top: 0.5em;
+}
+
+div.paginator{
+    text-align:center;
+}
+
+div.require p.require-info{
+    margin-bottom: 0px;
+
+}
+ul.require-info-description{
+    list-style-type: none;
+    margin-bottom: 1em;
+}
+
+ul.require-info-description li{
+    display: inline-block;
+    margin-right: 1em;
+
+}
+
+div.require-more{
+    margin-top: 1em;
+}
+
+div.comment-area{
+    margin-top: 2em;
+}
+
+h3.comment-area-title{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.4em;
+}
+
+div.django-ckeditor-widget{
+    width: 100%;
+}
+div.comment{
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+
+}
+
+div.reply{
+        margin-left: 2em;
+}
+

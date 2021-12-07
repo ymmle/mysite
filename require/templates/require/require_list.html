@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}Require{% endblock %}
+{% block nav_require_active %}active{% endblock %}
+
+{% load static %}
+{% block header_exends %}
+    <link rel="stylesheet" href="{% static 'require/require.css' %}">
+{% endblock %}
+
+{# 页面 #}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-8 col-ls-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">{% block require_list_title %}Requirement List{% endblock %} </div>
+                <div class="panel-body">
+                    {% for require in requires %}
+                        <div class="require">
+                            <h3><a href="{% url 'require_detail' require.pk %}">{{ require.title }}</a></h3>
+                            <p class="require-info">
+                                <span class="glyphicon glyphicon-tag"></span><a href="{% url 'requires_with_type' require.require_type.pk %}">{{ require.require_type }}</a>&nbsp;&nbsp;
+                                <span class="glyphicon glyphicon-time"></span>{{ require.created_time  | date:"Y-m-d G:m:s"}}
+                                 &nbsp;&nbsp;reading({{  require.get_read_num}})
+                            </p>
+                            <p>{{ require.content  | striptags|truncatechars:120 }}</p>
+                        </div>
+                    {% empty %}
+                         <div class="require">
+                            <h3> -- no content, please wait -- </h3>
+                         </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <div class="paginator">
+                <ul class="pagination">
+                    <li>
+                        {% if page_of_requires.has_previous %}
+                            <a href="?page={{ page_of_requires.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        {% else %}
+                            <span aria-hidden="true">&laquo;</span>
+                        {% endif %}
+                    </li>
+
+                    {% for page_num in page_range %}
+                        {% if page_num == page_of_requires.number %}
+                            <li class="active"><span>{{ page_num }}</span>
+                        {% else %}
+                            {%  if page_num == '...' %}
+                                <li><span>{{page_num }}</span>
+                            {% else %}
+                                <li><a href="?page={{ page_num }}">{{page_num }}</a></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    <li>
+                      {% if page_of_requires.has_next %}
+                            <a href="?page={{ page_of_requires.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        {% else %}
+                            <span aria-hidden="true">&raquo;</span>
+                        {% endif %}
+                    </li>
+                </ul>
+                <p>
+                    Total Requirement: {{ page_of_requires.paginator.count}}
+                    Current page:{{ page_of_requires.number }},Total pages:{{ page_of_requires.paginator.num_pages }}
+                </p>
+            </div>
+
+            </div>
+
+            <div class="hidden-xs col-sm-4 col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Type</div>
+                  <div class="panel-body">
+                      <ul style="list-style-type: none">
+                               {% for require_type in require_types %}
+                                    <li><a href="{% url 'requires_with_type'  require_type.pk %}">{{ require_type.type_name }}({{ require_type.require_count }})
+                                    </a></li>
+                                {% empty %}
+                                    <li></li>
+                               {% endfor %}
+                       </ul>
+                  </div>
+                </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">By date</div>
+                <div class="panel-body">
+                    <ul>
+                        {% for require_date, require_count in require_dates.items %}
+                            <li>
+                                <a href="{% url 'requires_with_date' require_date.year require_date.month%}">
+                                {{ require_date | date:"Y-m"}}</a>({{ require_count }})
+                                </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

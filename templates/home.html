@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{# 页面标题 #}
+{% block title %}
+    Tester | Home
+{% endblock %}
+
+{% block header_exends %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+{% endblock %}
+
+{% block nav_home_active %}active{% endblock %}
+
+{% block content %}
+    <h3 class="home-content">Welcome to Videojet Requirement Management Platform</h3>
+{% endblock %}
